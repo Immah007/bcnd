@@ -1,20 +1,11 @@
-const express = require('express');
-const app = express();
-const path = require('path');
+const http = require('http');
 
-const PORT = process.env.PORT || 3000;
-
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Route to handle sending text
-app.get('/sendText', (req, res) => {
-  const text = req.query.text;
-  console.log('Received text:', text);
-  res.send('Server Working');
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello from Nidejs!');
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
